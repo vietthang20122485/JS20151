@@ -20,7 +20,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  */
 public class Connect {
     private String ClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private String url = "jdbc:sqlserver://127.0.0.1:50000;databaseName=demo;user=sa;password=thang123";
+    private String url = "jdbc:sqlserver://localhost;databaseName=demo;user=sa;password=thang123";
     public static Connection connection;
     public Connect() {       
         try {
