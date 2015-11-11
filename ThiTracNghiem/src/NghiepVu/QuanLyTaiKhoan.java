@@ -7,6 +7,8 @@
 package NghiepVu;
 
 import DuLieu.TaiKhoan;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -17,13 +19,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vietthang20122485
  */
-public class QuanLyTaiKhoan extends javax.swing.JFrame {
+public final class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     /**
      * Creates new form QuanLyTaiKhoan
      */
     public QuanLyTaiKhoan() {
         initComponents();
+          Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         loadData();
     }
  public TaiKhoan getTaiKhoan(){
@@ -150,9 +154,19 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
         Add.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         Add.setText("Thêm");
+        Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddActionPerformed(evt);
+            }
+        });
 
         Delete.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         Delete.setText("Xoá");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
 
         tblTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,12 +278,17 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_AddActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
+        int row = tblTaiKhoan.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null,"Bạn phải chọn 1 dòng để xóa", "Lỗi xóa!",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn xóa tài khoản này ?", "Warning", JOptionPane.YES_NO_OPTION);
-        if(confirm==JOptionPane.YES_OPTION){
-        TaiKhoan taikhoan = getTaiKhoan();
-        taikhoan.delete(taikhoan.getMS());
-        loadData();
+        if (confirm == JOptionPane.YES_OPTION) {
+            TaiKhoan taikhoan = getTaiKhoan();
+            taikhoan.delete(tblTaiKhoan.getValueAt(row, 0).toString());
+            loadData();
         }
     }//GEN-LAST:event_DeleteActionPerformed
 
