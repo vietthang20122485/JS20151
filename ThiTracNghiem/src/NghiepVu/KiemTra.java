@@ -6,6 +6,21 @@
 
 package NghiepVu;
 
+import DuLieu.CauHoi;
+import DuLieu.ChiTietDe;
+import DuLieu.KetQua;
+import DuLieu.TaiKhoan;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 /**
  *
  * @author vietthang20122485
@@ -15,9 +30,24 @@ public class KiemTra extends javax.swing.JFrame {
     /**
      * Creates new form KiemTra
      */
+       private Timer timer;
+    public static String [][]Cauhoi = new String [30][8];
+    int k=0;
+    public static int dem=0;
+    private int m=30,s=0;
+    public static String MaDeThi;
+    Date thoiGian = new Date(); 
+    SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
+    String ngaythi = dinhDangThoiGian.format(thoiGian.getTime());
     public KiemTra() {
         initComponents();
+         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
+      ChiTietDe dethi = new ChiTietDe();
+    CauHoi cauhoi = new CauHoi();
+    TaiKhoan taikhoan = new TaiKhoan();
+    KetQua ketqua = new KetQua();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,19 +58,232 @@ public class KiemTra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        NhomRadioButton1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
+        btnRandom = new javax.swing.JButton();
+        lblThoigian = new javax.swing.JLabel();
+        lblDongHo = new javax.swing.JLabel();
+        lblDe = new javax.swing.JLabel();
+        btnBatDau = new javax.swing.JButton();
+        lblCauhoi = new javax.swing.JLabel();
+        txtNoiDung = new javax.swing.JTextField();
+        radA = new javax.swing.JRadioButton();
+        radD = new javax.swing.JRadioButton();
+        radB = new javax.swing.JRadioButton();
+        radC = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtPhuongAn = new javax.swing.JTextArea();
+        btnPre = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnDaChon = new javax.swing.JButton();
+        btnKetThuc = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
+
+        NhomRadioButton1.add(radA);
+        NhomRadioButton1.add(radB);
+        NhomRadioButton1.add(radC);
+        NhomRadioButton1.add(radD);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+
+        lblTitle.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 204));
+        lblTitle.setText("Bài thi trắc nghiệm");
+
+        btnRandom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRandom.setText("Random đề thi");
+        btnRandom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRandomActionPerformed(evt);
+            }
+        });
+
+        lblThoigian.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblThoigian.setText("Thời gian");
+
+        lblDongHo.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+
+        lblDe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDe.setText("Mã đề của bạn là:");
+
+        btnBatDau.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBatDau.setText("Bắt đầu");
+        btnBatDau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatDauActionPerformed(evt);
+            }
+        });
+
+        lblCauhoi.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblCauhoi.setText("Câu hỏi : 1");
+
+        txtNoiDung.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        txtNoiDung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoiDungActionPerformed(evt);
+            }
+        });
+
+        radA.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        radA.setText("A");
+        radA.setEnabled(false);
+        radA.setFocusPainted(false);
+        radA.setFocusable(false);
+
+        radD.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        radD.setText("D");
+        radD.setEnabled(false);
+        radD.setFocusPainted(false);
+        radD.setFocusable(false);
+
+        radB.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        radB.setText("B");
+        radB.setEnabled(false);
+        radB.setFocusPainted(false);
+        radB.setFocusable(false);
+
+        radC.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        radC.setText("C");
+        radC.setEnabled(false);
+        radC.setFocusPainted(false);
+        radC.setFocusable(false);
+
+        txtPhuongAn.setColumns(20);
+        txtPhuongAn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtPhuongAn.setRows(5);
+        jScrollPane1.setViewportView(txtPhuongAn);
+
+        btnPre.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnPre.setText("Pre");
+        btnPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreActionPerformed(evt);
+            }
+        });
+
+        btnNext.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnDaChon.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnDaChon.setText("Đã chọn");
+        btnDaChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDaChonActionPerformed(evt);
+            }
+        });
+
+        btnKetThuc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnKetThuc.setText("Finish");
+        btnKetThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetThucActionPerformed(evt);
+            }
+        });
+
+        btnThoat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnThoat.setText("Exit");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(213, 213, 213))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblThoigian)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDongHo))
+                        .addGap(69, 69, 69))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCauhoi, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDe, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(btnBatDau))
+                    .addComponent(btnRandom)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radA)
+                            .addComponent(radB)
+                            .addComponent(radC)
+                            .addComponent(radD)
+                            .addComponent(txtNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(btnPre, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(btnDaChon)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(lblThoigian, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDongHo)
+                .addGap(19, 19, 19)
+                .addComponent(lblTitle)
+                .addGap(18, 18, 18)
+                .addComponent(btnRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDe, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBatDau))
+                .addGap(18, 18, 18)
+                .addComponent(lblCauhoi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(radA)
+                .addGap(27, 27, 27)
+                .addComponent(radB)
+                .addGap(14, 14, 14)
+                .addComponent(radC)
+                .addGap(18, 18, 18)
+                .addComponent(radD)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 133, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNext)
+                            .addComponent(btnPre)
+                            .addComponent(btnDaChon)
+                            .addComponent(btnKetThuc)
+                            .addComponent(btnThoat))
+                        .addGap(75, 75, 75))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -51,17 +294,167 @@ public class KiemTra extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoiDungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNoiDungActionPerformed
+
+        private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        if(dethi.RandomDe().equals("")) JOptionPane.showMessageDialog(null, "Ngân hàng đề chưa có đề thi nào!");
+        MaDeThi = dethi.RandomDe();
+        lblDe.setText("Mã đề của bạn là: "+ MaDeThi);
+        ResultSet rs = cauhoi.LayCauHoi(MaDeThi);
+        int i=0;
+        try {
+            while (rs.next()){
+                for(int j=0;j<7;j++){
+                    Cauhoi[i][j] = rs.getString(j+1);
+                }
+                if(i<29) i++;
+            }
+            txtNoiDung.setText(Cauhoi[k][1]);
+            radA.setText("A. "+Cauhoi[k][2]);
+            radB.setText("B. "+Cauhoi[k][3]);
+            radC.setText("C. "+Cauhoi[k][4]);
+            radD.setText("D. "+Cauhoi[k][5]);
+            btnRandom.setVisible(false);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Lỗi nạp câu hỏi vào textbox");
+        }
+    }                                         
+
+    private void btnBatDauActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        radA.setEnabled(true);
+        radB.setEnabled(true);
+        radC.setEnabled(true);
+        radD.setEnabled(true);
+        timer = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(s==0){
+                    m--;
+                    s=60;
+                }
+                s--;
+                lblDongHo.setText(m+" : "+s);
+                if(m==0&&s==0){
+                    timer.stop();
+                    lblDongHo.setText("Time up!");
+                    radA.setEnabled(false);
+                    radB.setEnabled(false);
+                    radC.setEnabled(false);
+                    radD.setEnabled(false);
+                    btnNext.setEnabled(false);
+                    btnPre.setEnabled(false);
+                }
+            }
+        });
+        timer.start();
+        btnBatDau.setVisible(false);
+    }                                         
+
+    private void btnPreActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+        if(k>0) k--;
+        lblCauhoi.setText("Câu hỏi: "+(k+1));
+        txtNoiDung.setText(Cauhoi[k][1]);
+        radA.setText("A. "+Cauhoi[k][2]);
+        radB.setText("B. "+Cauhoi[k][3]);
+        radC.setText("C. "+Cauhoi[k][4]);
+        radD.setText("D. "+Cauhoi[k][5]);
+    }                                      
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        if(radA.isSelected()) Cauhoi[k][7]="A";
+        if(radB.isSelected()) Cauhoi[k][7]="B";
+        if(radC.isSelected()) Cauhoi[k][7]="C";
+        if(radD.isSelected()) Cauhoi[k][7]="D";
+        if(k<29) k++;
+        if(k==29) btnNext.setEnabled(false);
+        else btnNext.setEnabled(true);
+        lblCauhoi.setText("Câu hỏi: "+(k+1));
+        txtNoiDung.setText(Cauhoi[k][1]);
+        radA.setText("A. "+Cauhoi[k][2]);
+        radB.setText("B. "+Cauhoi[k][3]);
+        radC.setText("C. "+Cauhoi[k][4]);
+        radD.setText("D. "+Cauhoi[k][5]);
+    }                                       
+
+    private void btnDaChonActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        String s="";
+        if(radA.isSelected()) Cauhoi[k][7]="A";
+        if(radB.isSelected()) Cauhoi[k][7]="B";
+        if(radC.isSelected()) Cauhoi[k][7]="C";
+        if(radD.isSelected()) Cauhoi[k][7]="D";
+        for(int n=0;n<30;n++){
+            s+=(n+1)+Cauhoi[n][7]+" ";
+        }
+        txtPhuongAn.setText(s);
+    }                                         
+
+    private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        timer.stop();
+        JOptionPane.showMessageDialog(null, "Đã lưu kết quả. Ãn Exit để kết thúc phần thi.");
+        if(radA.isSelected()) Cauhoi[k][7]="A";
+        if(radB.isSelected()) Cauhoi[k][7]="B";
+        if(radC.isSelected()) Cauhoi[k][7]="C";
+        if(radD.isSelected()) Cauhoi[k][7]="D";
+        for(int x=0;x<30;x++)
+        {
+            if(Cauhoi[x][7].equals("")==false){
+                if(Cauhoi[x][7].compareTo(Cauhoi[x][6])==0) dem++;
+            }
+        }
+    }                                          
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        ketqua.GhiKetQua(taikhoan.TimMS(DangNhap.ten), ketqua.LamTronDiem(KiemTra.dem), ngaythi);
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát ?", "Warning", JOptionPane.YES_NO_OPTION);
+        if(confirm==JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }                                        
+
+    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup NhomRadioButton1;
+    private javax.swing.JButton btnBatDau;
+    private javax.swing.JButton btnDaChon;
+    private javax.swing.JButton btnKetThuc;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPre;
+    private javax.swing.JButton btnRandom;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCauhoi;
+    private javax.swing.JLabel lblDe;
+    private javax.swing.JLabel lblDongHo;
+    private javax.swing.JLabel lblThoigian;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JRadioButton radA;
+    private javax.swing.JRadioButton radB;
+    private javax.swing.JRadioButton radC;
+    private javax.swing.JRadioButton radD;
+    private javax.swing.JTextField txtNoiDung;
+    private javax.swing.JTextArea txtPhuongAn;
     // End of variables declaration//GEN-END:variables
 }
