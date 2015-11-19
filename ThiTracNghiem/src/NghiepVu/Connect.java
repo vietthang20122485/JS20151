@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -20,7 +21,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  */
 public class Connect {
     private String ClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private String url = "jdbc:sqlserver://localhost;databaseName=demo;user=sa;password=hoangkent2014";
+    private String url = "jdbc:sqlserver://localhost;databaseName=demo;user=sa;password=thang123";
     public static Connection connection;
     public Connect() {       
         try {
@@ -39,5 +40,10 @@ public class Connect {
     }
     public static void main(String[] args) {
         Connect connect = new Connect();
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+        } catch (Exception ex) {
+            System.out.println("Loi Look and Feel");
+        }
     }
 }
