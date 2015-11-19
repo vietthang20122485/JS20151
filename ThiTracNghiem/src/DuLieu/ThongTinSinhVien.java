@@ -14,18 +14,18 @@ import NghiepVu.Connect;
  * and open the template in the editor.
  */
 public class ThongTinSinhVien {
-    String MSSV;
-    String HoTen;
-    java.sql.Date NgaySinh;
-    String GioiTinh;
-    String Lop;
+    String mssv;
+    String hoTen;
+    java.sql.Date ngaySinh;
+    String gioiTinh;
+    String lop;
 
-    public ThongTinSinhVien(String MSSV, String HoTen, java.sql.Date NgaySinh, String GioiTinh, String Lop) {
-        this.MSSV = MSSV;
-        this.HoTen = HoTen;
-        this.NgaySinh = NgaySinh;
-        this.GioiTinh = GioiTinh;
-        this.Lop = Lop;
+    public ThongTinSinhVien(String mssv, String hoTen, java.sql.Date ngaySinh, String gioiTinh, String lop) {
+        this.mssv = mssv;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.lop = lop;
     }
     public ResultSet getdataTS(){
         ResultSet rs = null;
@@ -41,79 +41,80 @@ public class ThongTinSinhVien {
             PreparedStatement pst;
             try {
              pst = Connect.connection.prepareStatement("insert into ThiSinh values(?,?,?,?,?)");
-             pst.setString(1, thisinh.getMSSV());
+             pst.setString(1, thisinh.getMssv());
              pst.setString(2, thisinh.getHoTen());
              pst.setDate(3, thisinh.getNgaySinh());
-             pst.setString(4, GioiTinh);
-             pst.setString(5, Lop);
+             pst.setString(4, thisinh.getGioiTinh());
+             pst.setString(5, thisinh.getLop());
              if(pst.executeUpdate()>0) JOptionPane.showMessageDialog(null, "Đã thêm thí sinh!");
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Lỗi thêm!");
         }           
     }
-    public void SuaTS(String MSTS, String TenTS, String LopTS, java.sql.Date NgaySinh, String GioiTinh){
+    public void SuaTS(String msTS, String tenTS, String lopTS, java.sql.Date ngaySinh, String gioiTinh){
             PreparedStatement pst;
             try {
              pst = Connect.connection.prepareStatement("update ThiSinh set HoTen = ?, NgaySinh = ?, GioiTinh = ?, Lop = ? where MSSV = ?");
-             pst.setString(5, MSTS);
-             pst.setString(1, TenTS);
-             pst.setDate(2, NgaySinh);
-             pst.setString(3, GioiTinh);
-             pst.setString(4, LopTS);
+             pst.setString(5, msTS);
+             pst.setString(1, tenTS);
+             pst.setDate(2, ngaySinh);
+             pst.setString(3, gioiTinh);
+             pst.setString(4, lopTS);
              if(pst.executeUpdate()>0) JOptionPane.showMessageDialog(null, "Đã lưu thông tin thí sinh!");
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Lỗi thêm!");
         }           
     }
-     public void XoaTS(String Ma) {
+     public void XoaTS(String ma) {
             PreparedStatement pst;{
             try {
                 pst = Connect.connection.prepareStatement("Delete ThiSinh where MSSV = ?");
-                pst.setString(1, Ma);
+                pst.setString(1, ma);
                 if (pst.executeUpdate() > 0) JOptionPane.showMessageDialog(null,"Đã xóa thí sinh");
             } catch (SQLException ex) {
                JOptionPane.showMessageDialog(null, "Error delete!");
             }               
         }    
     }
-    public String getMSSV() {
-        return MSSV;
+
+    public String getMssv() {
+        return mssv;
     }
 
-    public void setMSSV(String MSSV) {
-        this.MSSV = MSSV;
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
     }
 
     public String getHoTen() {
-        return HoTen;
+        return hoTen;
     }
 
-    public void setHoTen(String HoTen) {
-        this.HoTen = HoTen;
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
     }
 
     public java.sql.Date getNgaySinh() {
-        return NgaySinh;
+        return ngaySinh;
     }
 
-    public void setNgaySinh(java.sql.Date NgaySinh) {
-        this.NgaySinh = NgaySinh;
+    public void setNgaySinh(java.sql.Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
 
     public String getGioiTinh() {
-        return GioiTinh;
+        return gioiTinh;
     }
 
-    public void setGioiTinh(String GioiTinh) {
-        this.GioiTinh = GioiTinh;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getLop() {
-        return Lop;
+        return lop;
     }
 
-    public void setLop(String Lop) {
-        this.Lop = Lop;
+    public void setLop(String lop) {
+        this.lop = lop;
     }
-    
+
 }
