@@ -18,16 +18,16 @@ import javax.swing.JOptionPane;
  * @author vietthang
  */
 public class TaiKhoan {
-    private String MS;
-    private String Username;
-    private String Password;
-    private String Role;
+    private String ms;
+    private String userName;
+    private String passWord;
+    private String role;
 
-    public TaiKhoan(String MS, String Username, String Password, String Role) {
-        this.MS = MS;
-        this.Username = Username;
-        this.Password = Password;
-        this.Role = Role;
+    public TaiKhoan(String ms, String username, String password, String role) {
+        this.ms = ms;
+        this.userName = username;
+        this.passWord = password;
+        this.role = role;
     }
 
     public TaiKhoan() {
@@ -48,9 +48,9 @@ public class TaiKhoan {
     public void insert(TaiKhoan tk){
            try{
                PreparedStatement pst1 = Connect.connection.prepareStatement("insert into TaiKhoan values(?,?,?,?)");
-               pst1.setString(1, tk.getMS());
-               pst1.setString(2, tk.getUsername());
-               pst1.setString(3, tk.getPassword());
+               pst1.setString(1, tk.getMs());
+               pst1.setString(2, tk.getUserName());
+               pst1.setString(3, tk.getPassWord());
                pst1.setString(4, tk.getRole());
            if(pst1.executeUpdate()>0) 
                JOptionPane.showMessageDialog(null, "Insert success!");
@@ -60,10 +60,10 @@ public class TaiKhoan {
            }
     }
     
-    public void delete(String MS){
+    public void delete(String ms){
            try{
                PreparedStatement pst1 = Connect.connection.prepareStatement("delete from Taikhoan where MS = ?");
-               pst1.setString(1, MS);
+               pst1.setString(1, ms);
                if(pst1.executeUpdate()>0) JOptionPane.showMessageDialog(null,"Delete success");
            }
            catch (SQLException ex) {
@@ -71,11 +71,11 @@ public class TaiKhoan {
          }   
     }
     
-    public ResultSet getdata_MS(String MS){
+    public ResultSet getdata_MS(String ms){
           ResultSet rs = null;
            try {
              PreparedStatement pst = Connect.connection.prepareStatement("Select MS from TaiKhoan where MS =?");
-             pst.setString(1, MS);
+             pst.setString(1, ms);
              rs = pst.executeQuery();
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "loi roi@@@@!");
@@ -99,11 +99,11 @@ public class TaiKhoan {
            return ms;
     }
     
-    public ResultSet getdata_Username(String Username){
+    public ResultSet getdata_Username(String username){
           ResultSet rs = null;
                      try {
              PreparedStatement pst = Connect.connection.prepareStatement("Select Username from TaiKhoan where Username=?");
-             pst.setString(1, Username);
+             pst.setString(1, username);
              rs = pst.executeQuery();
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "loi roi!$$$$$");
@@ -159,35 +159,36 @@ public class TaiKhoan {
        return kt;
       }
 
-    public String getMS() {
-        return MS;
+    public String getMs() {
+        return ms;
     }
 
-    public void setMS(String MS) {
-        this.MS = MS;
+    public void setMs(String ms) {
+        this.ms = ms;
     }
 
-    public String getUsername() {
-        return Username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getRole() {
-        return Role;
+        return role;
     }
 
-    public void setRole(String Role) {
-        this.Role = Role;
+    public void setRole(String role) {
+        this.role = role;
     }
+
 }
