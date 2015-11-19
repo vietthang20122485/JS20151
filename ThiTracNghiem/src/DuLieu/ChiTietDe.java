@@ -8,16 +8,16 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class ChiTietDe {
-   String MaDe;
-    String MS;
+   String maDe;
+    String ms;
     
-    public ChiTietDe(String MaDe, String MS) {
-        this.MaDe = MaDe;
-        this.MS = MS;
+    public ChiTietDe(String maDe, String ms) {
+        this.maDe = maDe;
+        this.ms = ms;
     }
 
-    public ChiTietDe(String MaDe) {
-        this.MaDe = MaDe;
+    public ChiTietDe(String maDe) {
+        this.maDe = maDe;
     }
 
     public ChiTietDe() {
@@ -84,18 +84,18 @@ public class ChiTietDe {
     }
     
     public String getMaDe() {
-        return MaDe;
+        return maDe;
     }
 
     public void setMaDe(String MaDe) {
-        this.MaDe = MaDe;
+        this.maDe = MaDe;
     }
 
     public String getMS() {
-        return MS;
+        return ms;
     }
 
     public void setMS(String MS) {
-        this.MS = MS;
+        this.ms = MS;
     } 
 }
