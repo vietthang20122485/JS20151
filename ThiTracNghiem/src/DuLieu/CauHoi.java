@@ -12,30 +12,30 @@ import NghiepVu.Connect;
  * and open the template in the editor.
  */
 public class CauHoi {
-    private String MS;
-    private String Noidung;
-    private String A;
-    private String B;
-    private String C;
-    private String D;
-    private String Dapan;
-    private String Hard;
+    private String ms;
+    private String noiDung;
+    private String a;
+    private String b;
+    private String c;
+    private String d;
+    private String dapAn;
+    private String hard;
     public CauHoi() {
     }
 
-    public CauHoi(String MS, String Noidung, String A, String B, String C, String D, String Dapan, String Hard) {
-        this.MS = MS;
-        this.Noidung = Noidung;
-        this.A = A;
-        this.B = B;
-        this.C = C;
-        this.D = D;
-        this.Dapan = Dapan;
-        this.Hard = Hard;
+    public CauHoi(String ms, String noiDung, String a, String b, String c, String d, String dapAn, String hard) {
+        this.ms = ms;
+        this.noiDung = noiDung;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        this.dapAn = dapAn;
+        this.hard = hard;
     }
 
-    public CauHoi(String MS) {
-        this.MS = MS;
+    public CauHoi(String ms) {
+        this.ms = ms;
     }
     
     public ResultSet getdata(){
@@ -52,13 +52,13 @@ public class CauHoi {
     public void insert (CauHoi ch){
        try {
            PreparedStatement pst = Connect.connection.prepareStatement("insert into Cauhoi values(?,?,?,?,?,?,?,?)");
-           pst.setString(1, ch.getMS());
-           pst.setString(2,ch.getNoidung());
+           pst.setString(1, ch.getMs());
+           pst.setString(2,ch.getNoiDung());
            pst.setString(3,ch.getA());
            pst.setString(4,ch.getB());
            pst.setString(5,ch.getC());
            pst.setString(6,ch.getD());
-           pst.setString(7,ch.getDapan());
+           pst.setString(7,ch.getDapAn());
            pst.setString(8,ch.getHard());
            if(pst.executeUpdate()>0) JOptionPane.showMessageDialog(null, "Insert success!");
        } catch (SQLException ex) {
@@ -68,14 +68,14 @@ public class CauHoi {
     public void update(CauHoi ch){
        try {
            PreparedStatement pst = Connect.connection.prepareStatement("update Cauhoi set Noidung = ?, A = ?, B = ?, C = ?, D = ?, Dapan = ?, Hard = ? where MS = ?");
-           pst.setString(1, ch.getNoidung());
+           pst.setString(1, ch.getNoiDung());
            pst.setString(2,ch.getA());
            pst.setString(3,ch.getB());
            pst.setString(4,ch.getC());
            pst.setString(5,ch.getD());
-           pst.setString(6,ch.getDapan());
+           pst.setString(6,ch.getDapAn());
            pst.setString(7,ch.getHard());
-           pst.setString(8,ch.getMS());
+           pst.setString(8,ch.getMs());
            if(pst.executeUpdate()>0) JOptionPane.showMessageDialog(null, "Update success!");
        } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error update!");
@@ -130,75 +130,77 @@ public class CauHoi {
     }
     
     public boolean check(CauHoi ch){
-            if(ch.getNoidung().equals("")||ch.getMS().equals("")||ch.getA().equals("")||ch.getB().equals("")||ch.getC().equals("")||ch.getD().equals("")){
+            if(ch.getNoiDung().equals("")||ch.getMs().equals("")||ch.getA().equals("")||ch.getB().equals("")||ch.getC().equals("")||ch.getD().equals("")){
                 JOptionPane.showMessageDialog(null, "Thông tin nhập vào không hợp lệ!");
                 return false;
             }
             return true;
        }
-    
-    public String getMS() {
-        return MS;
+
+    public String getMs() {
+        return ms;
     }
 
-    public void setMS(String MS) {
-        this.MS = MS;
+    public void setMs(String ms) {
+        this.ms = ms;
     }
 
-    public String getNoidung() {
-        return Noidung;
+    public String getNoiDung() {
+        return noiDung;
     }
 
-    public void setNoidung(String Noidung) {
-        this.Noidung = Noidung;
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
     }
 
     public String getA() {
-        return A;
+        return a;
     }
 
-    public void setA(String A) {
-        this.A = A;
+    public void setA(String a) {
+        this.a = a;
     }
 
     public String getB() {
-        return B;
+        return b;
     }
 
-    public void setB(String B) {
-        this.B = B;
+    public void setB(String b) {
+        this.b = b;
     }
 
     public String getC() {
-        return C;
+        return c;
     }
 
-    public void setC(String C) {
-        this.C = C;
+    public void setC(String c) {
+        this.c = c;
     }
 
     public String getD() {
-        return D;
+        return d;
     }
 
-    public void setD(String D) {
-        this.D = D;
+    public void setD(String d) {
+        this.d = d;
     }
 
-    public String getDapan() {
-        return Dapan;
+    public String getDapAn() {
+        return dapAn;
     }
 
-    public void setDapan(String Dapan) {
-        this.Dapan = Dapan;
+    public void setDapAn(String dapAn) {
+        this.dapAn = dapAn;
     }
 
     public String getHard() {
-        return Hard;
+        return hard;
     }
 
-    public void setHard(String Hard) {
-        this.Hard = Hard;
+    public void setHard(String hard) {
+        this.hard = hard;
     }
+    
+    
     
 }
