@@ -19,26 +19,50 @@ import NghiepVu.Connect;
  */
 
 public class KetQua {
-    String MSSV;
-    float Diem;
-    java.sql.Date NgayThi;
-
-    public KetQua(String MSSV, float Diem, java.sql.Date NgayThi) {
-        this.MSSV = MSSV;
-        this.Diem = Diem;
-        this.NgayThi = NgayThi;
-    }
-
-    public KetQua(java.sql.Date NgayThi) {
-        this.NgayThi = NgayThi;
-    }
+    String mssv;
+    float diem;
+    String ngayThi;
     
-    public KetQua(String MSSV) {
-        this.MSSV = MSSV;
-    }
-
     public KetQua() {
     }
+
+    public KetQua(String ngayThi) {
+        this.ngayThi = ngayThi;
+    }
+    
+
+    public KetQua(String mssv, float diem, String ngayThi) {
+        this.mssv = mssv;
+        this.diem = diem;
+        this.ngayThi = ngayThi;
+    }
+
+
+    public String getMssv() {
+        return mssv;
+    }
+
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
+    }
+
+    public float getDiem() {
+        return diem;
+    }
+
+    public void setDiem(float diem) {
+        this.diem = diem;
+    }
+
+    public String getNgayThi() {
+        return ngayThi;
+    }
+
+    public void setNgayThi(String ngayThi) {
+        this.ngayThi = ngayThi;
+    }
+    
+    
     
     public ResultSet XemDiem(String mssv){
            ResultSet rs =null;
@@ -64,29 +88,40 @@ public class KetQua {
          }
     }
     
-    public ResultSet getdataKQ_Tb(java.sql.Date Ngaythi){
+    public ResultSet getdataKQ_Tb(String ngayThi){
         ResultSet rs = null;
          try {  
            Statement st = Connect.connection.createStatement();
-           rs = st.executeQuery("select AVG(Diem) as DiemTrungBinh from KetQua where Ngaythi = '"+Ngaythi+"'");
+           rs = st.executeQuery("select AVG(Diem) as DiemTrungBinh from KetQua where Ngaythi = '"+ngayThi+"'");
         } catch (SQLException ex) {
            System.out.println("Error!");
         }
          return rs;
     }
     
-    public ResultSet getdataKQ_Maxmin(String sort_Type, java.sql.Date Ngaythi){
+    public ResultSet getdataKQ_Max(String Ngaythi){
         ResultSet rs = null;
          try {  
            Statement st = Connect.connection.createStatement();
-           rs = st.executeQuery("select * from KetQua where Ngaythi = '"+Ngaythi+"' and Diem "+sort_Type+" all(select Diem from KetQua) " );
+           rs = st.executeQuery("select * from KetQua where Ngaythi = '"+Ngaythi+"' and Diem = (select MAX(Diem) from KetQua where Ngaythi = '" +Ngaythi+"')");
         } catch (SQLException ex) {
            System.out.println("Error!");
         }
          return rs;
     }
     
-    public ResultSet getdataKQ_Sort(String sort_Type, java.sql.Date Ngaythi){
+    public ResultSet getdataKQ_Min(String Ngaythi){
+        ResultSet rs = null;
+         try {  
+           Statement st = Connect.connection.createStatement();
+           rs = st.executeQuery("select * from KetQua where Ngaythi = '"+Ngaythi+"' and Diem = (select MIN(Diem) from KetQua where Ngaythi = '" +Ngaythi+"')");
+        } catch (SQLException ex) {
+           System.out.println("Error!");
+        }
+         return rs;
+    }
+    
+    public ResultSet getdataKQ_Sort(String sort_Type, String Ngaythi){
         ResultSet rs = null;
          try {  
            Statement st = Connect.connection.createStatement();
@@ -109,27 +144,4 @@ public class KetQua {
            return diem;
     }
     
-    public String getMSSV() {
-        return MSSV;
-    }
-
-    public void setMSSV(String MSSV) {
-        this.MSSV = MSSV;
-    }
-
-    public float getDiem() {
-        return Diem;
-    }
-
-    public void setDiem(float Diem) {
-        this.Diem = Diem;
-    }
-
-    public Date getNgayThi() {
-        return NgayThi;
-    }
-
-    public void setNgayThi(java.sql.Date NgayThi) {
-        this.NgayThi = NgayThi;
-    }
 }
