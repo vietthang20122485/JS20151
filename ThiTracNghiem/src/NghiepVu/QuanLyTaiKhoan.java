@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package NghiepVu;
 
 import DuLieu.TaiKhoan;
@@ -19,82 +18,83 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vietthang20122485
  */
-public final class QuanLyTaiKhoan extends javax.swing.JFrame {
+public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     /**
      * Creates new form QuanLyTaiKhoan
      */
     public QuanLyTaiKhoan() {
         initComponents();
-          Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         loadData();
     }
- public TaiKhoan getTaiKhoan(){
-     String MS = textMS.getText().trim();
-     String Username = textUN.getText().trim();
-     String Password = textPW.getText().trim();
-     String Role = cbxRole.getSelectedItem().toString();
-     return new TaiKhoan(MS , Username , Password , Role);
-     }
-     public void loadData(){
-           DefaultTableModel dmt = new DefaultTableModel();
-           try {
-               ResultSet rs = getTaiKhoan().getdata();
-               ResultSetMetaData rsmd = rs.getMetaData();
-               int col = rsmd.getColumnCount();
-               String [] arr = new String [col];
-               for (int i =0;i<col;i++) {
-                   arr[i]=rsmd.getColumnName(i+1);
-               }
-               dmt.setColumnIdentifiers(arr);
-               while(rs.next()){
-               for (int i =0;i<col;i++){
-               try {
-                    arr[i]= rs.getString(i+1);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error!");
-                }       
-            }
-            dmt.addRow(arr);      
-        }
-        tblTaiKhoan.setModel(dmt);
-    } catch (SQLException ex) {
-       JOptionPane.showMessageDialog(null, "Error!");
-    }
-    }
-    public boolean checkTaiKhoan(TaiKhoan taikhoan){
-             if(taikhoan.getMS().equals("")||taikhoan.getUsername().equals("")||taikhoan.getPassword().equals("")){
-                 JOptionPane.showMessageDialog(null, "Bạn phải nhập đủ thông tin các mục!");
-                 return false;
-             }
-              if(taikhoan.getPassword().length()<6){
-                  JOptionPane.showMessageDialog(null, "Mật khẩu phải có ít nhất 6 kí tự!");
-                  return false;
-              }
-             ResultSet rs = null;
-             rs = taikhoan.getdata_MS(taikhoan.getMS());
-             try {
-                 while(rs.next()){
-                     JOptionPane.showMessageDialog(null, "Mã số người dùng đã tồn tại!");
-                     return false;
-                 }
-             } catch (SQLException ex) {
-                 JOptionPane.showMessageDialog(null, "loi roi!");
-             }
-             rs = getTaiKhoan().getdata_Username(taikhoan.getUsername());
-             try {
-                 while(rs.next()){
-                     JOptionPane.showMessageDialog(null, "Username đã tồn tại!");
-                     return false;
-                 }
-             } catch (SQLException ex) {
-                 JOptionPane.showMessageDialog(null, "loi roi!");
-             }
-             return true;
-    }
-    
 
+    public TaiKhoan getTaiKhoan() {
+        String ms = textMS.getText().trim();
+        String username = textUN.getText().trim();
+        String password = textPW.getText().trim();
+        String role = cbxRole.getSelectedItem().toString();
+        return new TaiKhoan(ms, username, password, role);
+    }
+
+    public void loadData() {
+        DefaultTableModel dmt = new DefaultTableModel();
+        try {
+            ResultSet rs = getTaiKhoan().getdata();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            String[] arr = new String[col];
+            for (int i = 0; i < col; i++) {
+                arr[i] = rsmd.getColumnName(i + 1);
+            }
+            dmt.setColumnIdentifiers(arr);
+            while (rs.next()) {
+                for (int i = 0; i < col; i++) {
+                    try {
+                        arr[i] = rs.getString(i + 1);
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null, "Error!");
+                    }
+                }
+                dmt.addRow(arr);
+            }
+            tblTaiKhoan.setModel(dmt);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error!");
+        }
+    }
+
+    public boolean checkTaiKhoan(TaiKhoan taikhoan) {
+        if (taikhoan.getMs().equals("") || taikhoan.getUserName().equals("") || taikhoan.getPassWord().equals("")) {
+            JOptionPane.showMessageDialog(null, "Bạn phải nhập đủ thông tin các mục!");
+            return false;
+        }
+        if (taikhoan.getPassWord().length() < 6) {
+            JOptionPane.showMessageDialog(null, "Mật khẩu phải có ít nhất 6 kí tự!");
+            return false;
+        }
+        ResultSet rs = null;
+        rs = taikhoan.getdata_MS(taikhoan.getMs());
+        try {
+            while (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Mã số người dùng đã tồn tại!");
+                return false;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "loi roi!");
+        }
+        rs = getTaiKhoan().getdata_Username(taikhoan.getUserName());
+        try {
+            while (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Username đã tồn tại!");
+                return false;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "loi roi!");
+        }
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +102,7 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -110,15 +110,15 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        textMS = new javax.swing.JTextField();
         textUN = new javax.swing.JTextField();
         textPW = new javax.swing.JTextField();
         cbxRole = new javax.swing.JComboBox();
         Add = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTaiKhoan = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblTaiKhoan = new javax.swing.JTable();
+        textMS = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,13 +137,6 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Role");
-
-        textMS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        textMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textMSActionPerformed(evt);
-            }
-        });
 
         textUN.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
@@ -168,6 +161,10 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel6.setText("QUẢN LÝ TÀI KHOẢN");
+
         tblTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -179,11 +176,9 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblTaiKhoan);
+        jScrollPane4.setViewportView(tblTaiKhoan);
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel6.setText("QUẢN LÝ TÀI KHOẢN");
+        textMS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -192,35 +187,33 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(91, 91, 91)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(textUN)
-                                        .addComponent(textMS)
-                                        .addComponent(textPW)
-                                        .addComponent(cbxRole, 0, 165, Short.MAX_VALUE))))))
+                            .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(textMS, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textUN, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textPW, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbxRole, javax.swing.GroupLayout.Alignment.LEADING, 0, 165, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel6)
-                .addGap(28, 28, 28)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(textMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,9 +233,9 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Delete)
                     .addComponent(Add))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,32 +246,27 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void textMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textMSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textMSActionPerformed
+    }// </editor-fold>                        
 
     /**
      * @param args the command line arguments
      */
 
-    
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {                                    
         // TODO add your handling code here:
         TaiKhoan taikhoan = getTaiKhoan();
-        if(checkTaiKhoan(taikhoan)==true) taikhoan.insert(taikhoan);
+        if (checkTaiKhoan(taikhoan) == true) {
+            taikhoan.insert(taikhoan);
+        }
         loadData();
-    }//GEN-LAST:event_AddActionPerformed
+    }                                   
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-      // TODO add your handling code here:
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
         int row = tblTaiKhoan.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null,"Bạn phải chọn 1 dòng để xóa", "Lỗi xóa!",JOptionPane.ERROR_MESSAGE);
@@ -290,7 +278,7 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
             taikhoan.delete(tblTaiKhoan.getValueAt(row, 0).toString());
             loadData();
         }
-    }//GEN-LAST:event_DeleteActionPerformed
+    }                                      
 
     /**
      * @param args the command line arguments
@@ -326,12 +314,10 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify                     
-
     // End of variables declaration                   
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton Add;
     private javax.swing.JButton Delete;
     private javax.swing.JComboBox cbxRole;
@@ -341,10 +327,10 @@ public final class QuanLyTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tblTaiKhoan;
     private javax.swing.JTextField textMS;
     private javax.swing.JTextField textPW;
     private javax.swing.JTextField textUN;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
