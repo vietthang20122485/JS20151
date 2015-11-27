@@ -61,7 +61,7 @@ public class Welcome extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Phần mềm thi trắc nghiệm Tiếng Anh");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\vietthang20122485\\Documents\\NetBeansProjects\\JS20151\\ThiTracNghiem\\asset\\images.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\lehuu\\Documents\\GitHub\\JS20151\\ThiTracNghiem\\asset\\images.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N

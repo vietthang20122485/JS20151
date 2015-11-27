@@ -144,4 +144,14 @@ public class KetQua {
            return diem;
     }
     
+    public ResultSet check(String ms, String ngayThi) {
+        ResultSet rs = null;
+         try {  
+           Statement st = Connect.connection.createStatement();
+           rs = st.executeQuery("select * from KetQua where MSSV = '" + ms + "'" + " and Ngaythi = '" + ngayThi +"'");
+        } catch (SQLException ex) {
+           System.out.println("Error!");
+        }
+         return rs;
+    } 
 }
